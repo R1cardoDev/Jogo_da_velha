@@ -1,107 +1,55 @@
 //--variavel----------------------------------
-var resultado = document.querySelector("#Resultado"),
-casa1 = document.querySelector("#casa1"),
-casa2 = document.querySelector("#casa2"),
-casa3 = document.querySelector("#casa3"),
-casa4 = document.querySelector("#casa4"),
-casa5 = document.querySelector("#casa5"),
-casa6 = document.querySelector("#casa6"),
-casa7 = document.querySelector("#casa7"),
-casa8 = document.querySelector("#casa8"),
-casa9 = document.querySelector("#casa9"),
-jogador1 = 0, jogagor2 = 0, imgx = new Image(), imgo = new Image();
-//—tratamento de imgens——————————
-imgx.src = "Img/Xis.PNG";
-imgx.width = 200;imgx.height = 200;
-imgo.src = "Img/Zero.jpg";
-imgo.width = 200;imgo.height = 200;
-//—evento click———————————————-
-casa1. addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa1.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa1.innerHTML == ""){
-casa1.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
+const resultado = document.querySelector("#resultado"), listaClick = [];
+var jogador1 = "", jogador2 = "", contador = null;
 
-casa2.addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa2.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa2.innerHTML == ""){
-casa2.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
+//--tratar e retornar dados---------
+function eevento(y) {
 
-casa3.addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa3.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa3.innerHTML == ""){
-casa3.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
+    //—tratamento de imgens——————————
+    var imgo = new Image();
+    var imgx = new Image();
+    imgx.src = "Img/Xis.PNG";
+    imgx.width = 200; imgx.height = 200;
+    imgo.src = "Img/Zero.jpg";
+    imgo.width = 200; imgo.height = 200;
 
-casa4.addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa4.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa4.innerHTML == ""){
-casa4.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
+    // vericar o click opcao---------------
+    listaClick.push(y);
+    var verif = listaClick.filter(x => x === y).length;
+    if (verif <= 1) {
+        if (resultado.innerHTML == "" || resultado.innerHTML == null) {
+            document.querySelector("#casa" + y).appendChild(imgx);
+            resultado.innerHTML = "Jogador 2";
+            jogador1 += y;
 
-casa5.addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa5.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa5.innerHTML == ""){
-casa5.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
+        } else if (resultado.innerHTML == "Jogador 1") {
+            document.querySelector("#casa" + y).appendChild(imgx);
+            resultado.innerHTML = "Jogador 2";
+            jogador1 += y;
 
-casa6.addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa6.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa6.innerHTML == ""){
-casa6.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
+        } else if (resultado.innerHTML == "Jogador 2") {
+            document.querySelector("#casa" + y).appendChild(imgo);
+            resultado.innerHTML = "Jogador 1";
+            jogador2 += y;
+        };
+    }
+    // lista de probabilidade de ganhar---------------------------------------------------------
+    console.log("jogador1 "+jogador1);
+    console.log("jogador2 "+jogador2);
+    listaVencedor = [123, 132, 213, 231, 312, 321, 456, 465, 564, 546, 654, 645, 789, 798, 897,
+        879, 978, 987, 147, 174, 471, 417, 714, 741, 258, 285, 582, 528, 852, 825, 369, 396, 693,
+        639, 936, 963, 159, 195, 591, 519, 951, 915357, 375, 537, 573, 753, 735, 6239, 5791];
 
-casa7.addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa7.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa7.innerHTML == ""){
-casa7.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
+    for (var x = 0; x <= listaVencedor.length; x++) {
+        if (jogador1 == listaVencedor[x] || jogador1.slice(1) == listaVencedor[x] || jogador1.slice(2) == listaVencedor[x] || jogador1.slice(3) == listaVencedor[x]) {
+            resultado.innerHTML = ""; resultado.innerHTML = "Jogador 1 Venceu !!"
+        };
+        if (jogador2 == listaVencedor[x] || jogador2.slice(1) == listaVencedor[x] || jogador2.slice(2) == listaVencedor[x] || jogador2.slice(3) == listaVencedor[x]) {
+            resultado.innerHTML = ""; resultado.innerHTML = "Jogador 1 Venceu !!"
+        };
+    }
+    // finalizar o jogo ------------------------------------------
+    contador += 1; if (contador === 9 ){resultado.innerHTML = "Deu Veia !!"};
 
-casa8.addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa8.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa8.innerHTML == ""){
-casa8.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
+}
 
-casa9.addEventListener("click", function(){
-if(resultado.innerHTML == ""){
-casa9.appendChild(imgx);
-resultado.innerHTML = "Jogador 2"
-}else if(casa9.innerHTML == ""){
-casa9.appendChild(imgo);
-resultado.innerHTML = "Jogador 1"
-};
-});
